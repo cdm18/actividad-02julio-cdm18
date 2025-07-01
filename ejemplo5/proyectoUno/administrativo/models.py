@@ -26,6 +26,8 @@ class Estudiante(models.Model):
                 valor = "Pichincha"
         return valor
 
+    # este tipo de funciones son fundamentales de definir en un MODELO de una clase
+
 class NumeroTelefonico(models.Model):
     telefono = models.CharField(max_length=100)
     tipo = models.CharField(max_length=100)
