@@ -58,6 +58,7 @@ class Matricula(models.Model):
     comentario = models.CharField(max_length=200)
 
     # Agregar costo
+    costo = models.DecimalField(max_digits=8, decimal_places=2, default=0)
 
     def __str__(self):
         return "Matricula: Estudiante(%s) - Modulo(%s)" % \
