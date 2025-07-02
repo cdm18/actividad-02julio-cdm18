@@ -1,0 +1,35 @@
+{% extends "master.html" %}
+{% block title %}Listado de estudiantes{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Listado de estudiantes</h1>
+
+<a class="btn btn-primary btn-sm mb-3" href="{% url 'crear_estudiante' %}">+ Nuevo estudiante</a>
+
+<table class="table table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Cédula</th>
+            <th>Edad</th>
+            <th>Tipo</th>
+            <th>Costo total matrículas ($)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for est in estudiantes %}
+        <tr>
+            <td>{{ est.nombre }}</td>
+            <td>{{ est.apellido }}</td>
+            <td>{{ est.cedula }}</td>
+            <td>{{ est.edad }}</td>
+            <td>{{ est.get_tipo_estudiante_display }}</td>
+            <td>{{ est.total_costo|default_if_none:0|floatformat:2 }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6" class="text-center">Sin estudiantes registrados.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
