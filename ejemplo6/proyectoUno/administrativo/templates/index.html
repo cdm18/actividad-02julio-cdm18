@@ -1,62 +1,67 @@
 {% extends "master.html" %}
 
 {% block title %}
-  Listado de Estudiantes
+    Listado de Estudiantes
 {% endblock %}
 
 {% block content %}
-<h3>Número de estudiantes {{ numero_estudiantes }}</h3>
+    <h3>Número de estudiantes {{ numero_estudiantes }}</h3>
 
-<table id="tabla_datos" class="cell-border">
+    <table id="tabla_datos" class="cell-border">
 
-  <thead>
-    <tr>
-      <th>Estudiante</th>
-      <th>Cedula</th>
-      <th>Correo</th>
-      <th>Numeros Telefónicos <i class="fa fa-phone"></i></th>
-      <th>Opciones</th>
-    </tr>
-  </thead>
+        <thead>
+        <tr>
+            <th>Estudiante</th>
+            <th>Cedula</th>
+            <th>Correo</th>
+            <th>Numeros Telefónicos <i class="fa fa-phone"></i></th>
+            <th>Opciones</th>
+        </tr>
+        </thead>
 
-  {% for e in estudiantes %}
-  <tr>
-    <td> {{e.nombre}} {{e.apellido}}</td>
-    <td> {{e.cedula}} <br>
-      ({{e.get_provincia}})
-    </td>
-    <td> {{e.correo}}</td>
-    <td>
-      <ul>
-        {% for t in e.numeros_telefonicos.all %}
-          <li>
-            <span>{{t.telefono}} - <span>{{t.tipo}}</span> - <a href="{% url 'editar_numero_telefonico' t.id %}" title="editar"><i class="fa fa-edit"></i></a> </span>
-          </li>
+        {% for e in estudiantes %}
+            <tr>
+                <td> {{ e.nombre }} {{ e.apellido }}</td>
+                <td> {{ e.cedula }} <br>
+                    ({{ e.get_provincia }})
+                </td>
+                <td> {{ e.correo }}</td>
+                <td>
+                    <ul>
+                        {% for t in e.numeros_telefonicos.all %}
+                            <li>
+                                <span>{{ t.telefono }} - <span>{{ t.tipo }}</span> - <a
+                                        href="{% url 'editar_numero_telefonico' t.id %}" title="editar"><i
+                                        class="fa fa-edit"></i></a> </span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="main-blue-button">
+                        <a href="{% url 'crear_numero_telefonico_estudiante' e.id %}">+Teléfono</a>
+                    </div>
+
+                </td>
+                <td>
+                    <div class="main-blue-button-2">
+                        <a href="{% url 'obtener_estudiante' e.id %}">ver</a> <br>
+                    <a href="{% url 'editar_estudiante' e.id %}"><i class="fa fa-edit"></i></a> <br>
+                    </div>
+
+                    <button class="alert-warning" href="{% url 'eliminar_estudiante' e.id %}"
+                           onclick="return confirm('¿Está seguro de la eliminación?')">
+                            <a>eliminar</a>
+                    </button>
+
+
+                </td>
+
+            </tr>
         {% endfor %}
-      </ul>
-      <div class="main-blue-button">
-        <a href="{% url 'crear_numero_telefonico_estudiante' e.id%}">+Teléfono</a>
-      </div>
+    </table>
 
-    </td>
-    <td>
-      <div class="main-blue-button-2">
-      <a href="{% url 'obtener_estudiante' e.id %}">ver</a> <br>
-      <a href="{% url 'editar_estudiante' e.id %}">editar</a> <br>
-      <a href="{% url 'eliminar_estudiante' e.id %}"
-      onclick="return confirm('¿Está seguro de la eliminación?')" >
-      eliminar</a>
-
-      </div>
-    </td>
-
-  </tr>
-  {% endfor %}
-</table>
-
-<script type="text/javascript">
-  $(document).ready( function () {
-    $('#tabla_datos').DataTable();
-  });
-</script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabla_datos').DataTable();
+        });
+    </script>
 {% endblock %}
