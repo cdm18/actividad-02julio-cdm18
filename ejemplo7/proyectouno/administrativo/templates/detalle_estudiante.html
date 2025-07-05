@@ -1,5 +1,6 @@
 {% extends "master.html" %}
 
+{% block content %}
 <h2>Detalle estudiante</h2>
 
 <b>Nombre:</b> {{e.nombre}}
@@ -33,3 +34,6 @@
 
 </br>
 [<a href="{% url 'index' %}">inicio</a>]
+
+
+{% endblock %}

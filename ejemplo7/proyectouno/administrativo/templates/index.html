@@ -3,9 +3,9 @@
 {% block content %}
     <h1>{{ mititulo }}</h1>
     <hr>
-    <h3>Número de Matriculas {{ numero_matriculas }}</h3>
+    <h3 class="mb-4">Número de Matrículas: <strong>{{ numero_matriculas }}</strong></h4>
     <hr>
-    [<a href="{% url 'crear_matricula' %}">nuevo</a>]
+    <a href="{% url 'crear_matricula' %}" class="btn custom-btn">+ Nueva Matrícula</a>
     <hr>
     <table class="table table-striped">
         <thead class="table-dark">

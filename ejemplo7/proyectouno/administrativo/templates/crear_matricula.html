@@ -1,13 +1,46 @@
 {% extends "master.html" %}
-{% block content%}
-<h2>Crear Matricula</h2>
+{% load form_extras %}
 
-<form action="" method="post">
-  {% csrf_token %}
-  {{formulario.as_p}}
-  <p><input type='submit' value='Agregar'/></p>
-</form>
+{% block content %}
+  <h2>{% if formulario.instance.pk %}Editar{% else %}Crear{% endif %} Matrícula</h2>
 
-[<a href="{% url 'index' %}">inicio</a>]
+  <form method="post" class="custom-form">
+    {% csrf_token %}
 
+    <div style="display: none;">
+      {{ formulario.estudiante }}
+      {{ formulario.modulo }}
+      {{ formulario.costo }}
+    </div>
+
+    {% if not formulario.fields.estudiante.widget.input_type == 'hidden' %}
+    <div class="form-group">
+      <label for="{{ formulario.estudiante.id_for_label }}">Estudiante:</label>
+      {{ formulario.estudiante|add_class:"form-control" }}
+    </div>
+    {% endif %}
+
+    {% if not formulario.fields.modulo.widget.input_type == 'hidden' %}
+    <div class="form-group">
+      <label for="{{ formulario.modulo.id_for_label }}">Módulo:</label>
+      {{ formulario.modulo|add_class:"form-control" }}
+    </div>
+    {% endif %}
+
+    {% if not formulario.fields.costo.widget.input_type == 'hidden' %}
+    <div class="form-group">
+      <label for="{{ formulario.costo.id_for_label }}">Costo:</label>
+      {{ formulario.costo|add_class:"form-control" }}
+    </div>
+    {% endif %}
+
+    <div class="form-group">
+      <label for="{{ formulario.comentario.id_for_label }}">Comentario:</label>
+      {{ formulario.comentario|add_class:"form-control" }}
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+  </form>
+
+  <a href="{% url 'index' %}">Inicio</a>
 {% endblock %}
